@@ -3,9 +3,9 @@ import { context } from "esbuild";
 const watch = process.argv.includes("--watch");
 
 const ctx = await context({
-  entryPoints: ["src/mk24-hello-card.ts"],
+  entryPoints: ["src/main.js"],
   bundle: true,
-  outfile: "dist/mk24-hello-card.js",
+  outfile: "dist/ha-mk24.js",
   format: "esm",
   target: "es2020",
   sourcemap: true,

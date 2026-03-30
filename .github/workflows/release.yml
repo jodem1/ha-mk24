@@ -28,4 +28,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/mk24-hello-card.js
+            dist/ha-mk24.js

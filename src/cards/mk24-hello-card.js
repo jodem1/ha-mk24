@@ -1,23 +1,5 @@
-type HassEntity = {
-  state: string;
-  attributes?: Record<string, unknown>;
-};
-
-type HomeAssistant = {
-  states: Record<string, HassEntity>;
-};
-
-type LovelaceCardConfig = {
-  type: string;
-  title?: string;
-  entity?: string;
-};
-
 class Mk24HelloCard extends HTMLElement {
-  private _hass?: HomeAssistant;
-  private _config?: LovelaceCardConfig;
-
-  setConfig(config: LovelaceCardConfig): void {
+  setConfig(config) {
     if (!config) {
       throw new Error("Invalid configuration");
     }
@@ -25,16 +7,16 @@ class Mk24HelloCard extends HTMLElement {
     this.render();
   }
 
-  set hass(hass: HomeAssistant) {
+  set hass(hass) {
     this._hass = hass;
     this.render();
   }
 
-  getCardSize(): number {
+  getCardSize() {
     return 2;
   }
 
-  private render(): void {
+  render() {
     if (!this._config) {
       return;
     }
@@ -49,7 +31,8 @@ class Mk24HelloCard extends HTMLElement {
     this.innerHTML = `
       <ha-card header="${title}">
         <div class="card-content">
-          <p>Hellooooo Card is loaded correctly. Updated! Again?</p>
+          <p>Hello Card loaded?</p>
+          <p>Card is loaded correctly.</p>
           <p><strong>State:</strong> ${stateText}</p>
         </div>
       </ha-card>
@@ -58,12 +41,6 @@ class Mk24HelloCard extends HTMLElement {
 }
 
 customElements.define("mk24-hello-card", Mk24HelloCard);
-
-declare global {
-  interface Window {
-    customCards?: Array<Record<string, unknown>>;
-  }
-}
 
 window.customCards = window.customCards || [];
 window.customCards.push({

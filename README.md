@@ -5,8 +5,9 @@ Minimal starter repository for creating Home Assistant custom cards and distribu
 ## What is included
 
 - HACS metadata in `hacs.json`
-- TypeScript source file in `src/mk24-hello-card.ts`
-- Build output in `dist/mk24-hello-card.js`
+- Main entry file in `src/main.js`
+- Card modules in `src/cards/`
+- Build output in `dist/ha-mk24.js`
 - GitHub Actions workflow that creates a release asset on tags (`v*`)
 
 ## Requirements
@@ -60,10 +61,10 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-4. GitHub Actions builds the card and attaches `dist/mk24-hello-card.js` to the GitHub release.
+4. GitHub Actions builds the card bundle and attaches `dist/ha-mk24.js` to the GitHub release.
 5. In HACS, install/update this card repository.
 6. Add resource in Home Assistant:
-   - URL: `/hacsfiles/<your-repo-name>/mk24-hello-card.js`
+   - URL: `/hacsfiles/<your-repo-name>/ha-mk24.js`
    - Type: `JavaScript Module`
 7. Add test card YAML:
 
@@ -85,15 +86,15 @@ For normal development, use two modes:
 
 1. Fast local iteration (no tag/release each change):
    - Keep `npm run dev` running locally.
-   - Copy `dist/mk24-hello-card.js` into your HA config at:
-     - `/homeassistant/www/community/ha-mk24/mk24-hello-card.js`
+   - Copy `dist/ha-mk24.js` into your HA config at:
+     - `/homeassistant/www/community/ha-mk24/ha-mk24.js`
    - Helper command (hardcoded to `ssh raspi`):
 
 ```bash
 npm run sync:community
 ```
 
-   - This command also removes stale `mk24-hello-card.js.gz` and `mk24-hello-card.js.map`
+   - This command also removes stale `ha-mk24.js.gz` and `ha-mk24.js.map`
      on Home Assistant so the updated `.js` is served.
 
    - Hard refresh browser.
@@ -118,6 +119,6 @@ If no entity is configured, it shows `No entity selected`.
 
 When adding more cards, repeat this pattern:
 
-- Create source file in `src/`
-- Add another entry point in `esbuild.config.mjs`
-- Update `hacs.json` and release assets if needed
+- Create a new card module in `src/cards/`
+- Import the module in `src/main.js`
+- Keep `hacs.json` and release asset pointing to `dist/ha-mk24.js`
