@@ -1,0 +1,15 @@
+{
+  "name": "ha-mk24",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Custom Home Assistant cards distributed with HACS.",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "dev": "node esbuild.config.mjs --watch",
+    "deploy": "npm run build && scp dist/mk24-hello-card.js ${HA_DEPLOY_HOST:-raspi}:${HA_DEPLOY_PATH:-/homeassistant/www/mk24/}"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.2",
+    "typescript": "^5.8.3"
+  }
+}
