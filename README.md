@@ -35,24 +35,7 @@ npm run build
 npm run dev
 ```
 
-4. Optional direct deploy over SSH:
-
-```bash
-npm run deploy
-```
-
-Notes:
-
-- This script builds and uploads `dist/mk24-hello-card.js` using `scp`.
-- Default SSH host alias: `raspi` (from your `~/.ssh/config`)
-- Default destination: `/homeassistant/www/mk24/`
-- Override with env vars when needed:
-
-```bash
-HA_DEPLOY_HOST=raspi HA_DEPLOY_PATH=/homeassistant/www/mk24/ npm run deploy
-```
-
-5. Add the test card to a dashboard:
+4. Add the test card to a dashboard:
 
 ```yaml
 type: custom:mk24-hello-card
@@ -60,7 +43,7 @@ title: Hello from custom card
 entity: sensor.temperature
 ```
 
-6. Hard refresh browser cache after updates:
+5. Hard refresh browser cache after updates:
 
 - Browser hard refresh (`Ctrl+Shift+R` / `Cmd+Shift+R`)
 - If needed, clear Home Assistant frontend cache
@@ -95,6 +78,31 @@ Important:
 - If HACS offers to add resources automatically, accept it.
 - Resource path under `/hacsfiles/...` depends on your repository name in GitHub.
 - After updates, hard refresh browser (`Ctrl+Shift+R`).
+
+## Development workflow with HACS
+
+For normal development, use two modes:
+
+1. Fast local iteration (no tag/release each change):
+   - Keep `npm run dev` running locally.
+   - Copy `dist/mk24-hello-card.js` into your HA config at:
+     - `/homeassistant/www/community/ha-mk24/mk24-hello-card.js`
+   - Helper command (hardcoded to `ssh raspi`):
+
+```bash
+npm run sync:community
+```
+
+   - This command also removes stale `mk24-hello-card.js.gz` and `mk24-hello-card.js.map`
+     on Home Assistant so the updated `.js` is served.
+
+   - Hard refresh browser.
+
+2. Real distribution test:
+   - Create a new tag/release.
+   - Update through HACS to verify install/upgrade behavior.
+
+So: you do **not** need a new tag/release for every small change while developing.
 
 ## First card behavior
 

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node esbuild.config.mjs",
     "dev": "node esbuild.config.mjs --watch",
-    "deploy": "npm run build && scp dist/mk24-hello-card.js ${HA_DEPLOY_HOST:-raspi}:${HA_DEPLOY_PATH:-/homeassistant/www/mk24/}"
+    "sync:community": "ssh raspi \"mkdir -p /homeassistant/www/community/ha-mk24\" && scp dist/mk24-hello-card.js raspi:/homeassistant/www/community/ha-mk24/mk24-hello-card.js && ssh raspi \"rm -f /homeassistant/www/community/ha-mk24/mk24-hello-card.js.gz /homeassistant/www/community/ha-mk24/mk24-hello-card.js.map\""
   },
   "devDependencies": {
     "esbuild": "^0.25.2",

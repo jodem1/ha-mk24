@@ -49,7 +49,7 @@ class Mk24HelloCard extends HTMLElement {
     this.innerHTML = `
       <ha-card header="${title}">
         <div class="card-content">
-          <p>Card is loaded correctly.</p>
+          <p>Hellooooo Card is loaded correctly. Updated! Again?</p>
           <p><strong>State:</strong> ${stateText}</p>
         </div>
       </ha-card>
