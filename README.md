@@ -91,7 +91,7 @@ For normal development, use two modes:
    - Helper command (hardcoded to `ssh raspi`):
 
 ```bash
-npm run sync:community
+npm run deploy
 ```
 
    - This command also removes stale `ha-mk24.js.gz` and `ha-mk24.js.map`
@@ -100,7 +100,7 @@ npm run sync:community
    - Hard refresh browser.
 
 2. Real distribution test:
-   - Create a new tag/release.
+   - Create a new tag/release e.g. `git tag v0.1.2` and push to origin `git push origin v0.1.2`
    - Update through HACS to verify install/upgrade behavior.
 
 So: you do **not** need a new tag/release for every small change while developing.

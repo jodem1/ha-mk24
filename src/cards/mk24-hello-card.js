@@ -31,7 +31,7 @@ class Mk24HelloCard extends HTMLElement {
     this.innerHTML = `
       <ha-card header="${title}">
         <div class="card-content">
-          <p>Hello Card loaded?</p>
+          <p>Hello Card loaded? And updated</p>
           <p>Card is loaded correctly.</p>
           <p><strong>State:</strong> ${stateText}</p>
         </div>
